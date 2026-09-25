@@ -52,7 +52,7 @@
             letter-spacing: 0.1px;
         }
 
-        /* Navbar & Logos (เพิ่ม Transition และพฤติกรรมการเลื่อนซ่อน/แสดงอย่างลื่นไหล) */
+        /* Navbar & Logos */
         .navbar.sticky-top {
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
             will-change: transform;
@@ -177,7 +177,7 @@
         }
 
         /* Activities Zone */
-        .activity-zone-title { font-size: 1.35rem; color: var(--pn-blue); font-weight: 600; margin: 58px 0 26px 0; display: flex; align-items: center; }
+        .activity-zone-title { font-size: 1.35rem; color: var(--pn-blue); font-weight: 600; margin: 38px 0 26px 0; display: flex; align-items: center; }
         .activity-zone-title i { color: var(--pn-gold) !important; }
         .activity-zone-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--pn-line), transparent); margin-left: 20px; }
         .activity-wrapper { background: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--pn-line); margin-bottom: 32px; cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; }
@@ -306,7 +306,7 @@
             line-break: loose;
         }
 
-        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง (ใช้สีน้ำเงินโทนเดียวกับเว็บไซต์) --- */
+        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง --- */
         .scroll-top-btn {
             position: fixed;
             bottom: -60px;
@@ -540,7 +540,7 @@
 
 <nav class="navbar navbar-dark bg-pn sticky-top shadow py-2">
     <div class="container d-flex justify-content-between align-items-center navbar-container-custom">
-        <a class="navbar-brand d-flex align-items-center" href="#">
+        <a class="navbar-brand d-flex align-items-center" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
             <img src="" id="schoolLogo" style="display:none">
             <img src="" id="scLogo" style="display:none">
             <div class="ms-2 ms-md-3 text-start">
@@ -590,12 +590,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Announcements Section -->
-    <div class="container mb-4" id="announcementSection" style="display:none;">
-        <div class="activity-zone-title mt-2 mb-4"><i class="fa-solid fa-bullhorn me-2"></i>ประกาศ / ข่าวสารล่าสุด</div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="announcementGrid"></div>
-    </div>
 
     <div class="container mb-5">
         <div class="filter-bar shadow-sm">
@@ -611,13 +605,17 @@
                         <input type="text" id="systemSearchInput" class="form-control border-2 border-start-0 ps-1" placeholder="พิมพ์ชื่อ, ตำแหน่ง..." oninput="handleSearchInput()">
                     </div>
                 </div>
+                <!-- ปรับแต่งส่วนของแท็บให้มี 4 แท็บ และเรียงข่าวสาร/กิจกรรมไว้เป็นอันดับแรกสุด -->
                 <div class="col-12 col-md-5 col-lg-7 mt-3 mt-md-0">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <button class="nav-link active" id="pills-election-tab" data-bs-toggle="pill" data-bs-target="#pills-election" type="button" onclick="updateView()"><i class="fa-solid fa-vote-yea me-1"></i>ตามวาระเลือกตั้ง</button>
+                            <button class="nav-link active" id="pills-activity-tab" data-bs-toggle="pill" data-bs-target="#pills-activity" type="button" onclick="updateView()"><i class="fa-solid fa-bullhorn me-1"></i>ข่าวสาร/กิจกรรม</button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" id="pills-operation-tab" data-bs-toggle="pill" data-bs-target="#pills-operation" type="button" onclick="updateView()"><i class="fa-solid fa-briefcase me-1"></i>ตามฝ่ายปฏิบัติงาน</button>
+                            <button class="nav-link" id="pills-election-tab" data-bs-toggle="pill" data-bs-target="#pills-election" type="button" onclick="updateView()"><i class="fa-solid fa-vote-yea me-1"></i>วาระเลือกตั้ง</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="pills-operation-tab" data-bs-toggle="pill" data-bs-target="#pills-operation" type="button" onclick="updateView()"><i class="fa-solid fa-briefcase me-1"></i>ฝ่ายปฏิบัติงาน</button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" id="pills-advisor-tab" data-bs-toggle="pill" data-bs-target="#pills-advisor" type="button" onclick="updateView()"><i class="fa-solid fa-chalkboard-user me-1"></i>ครูที่ปรึกษา</button>
@@ -628,19 +626,33 @@
         </div>
 
         <div class="tab-content mt-4 mt-md-5">
-            <div class="tab-pane fade show active" id="pills-election">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="electionGrid"></div>
+            <!-- แท็บที่ 1: ข่าวสารและกิจกรรม (ถูกตั้งเป็นหน้าแรก Default) -->
+            <div class="tab-pane fade show active" id="pills-activity">
                 
+                <!-- ส่วนประกาศ / ข่าวสาร ถูกย้ายมาแสดงผลในแท็บนี้ -->
+                <div id="announcementSection" style="display:none; margin-bottom: 40px;">
+                    <div class="activity-zone-title mt-2 mb-4"><i class="fa-solid fa-bullhorn me-2"></i>ประกาศ / ข่าวสารล่าสุด</div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="announcementGrid"></div>
+                </div>
+
+                <!-- ส่วนภาพผลงานกิจกรรม -->
                 <div id="activitySection" style="display:none;">
                     <div class="activity-zone-title"><i class="fa-solid fa-star me-2"></i>ภาพผลงานและกิจกรรมของสภานักเรียน</div>
                     <div id="activityRenderContainer"></div>
                 </div>
             </div>
+
+            <!-- แท็บที่ 2: ทำเนียบตามวาระเลือกตั้ง -->
+            <div class="tab-pane fade" id="pills-election">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="electionGrid"></div>
+            </div>
             
+            <!-- แท็บที่ 3: ทำเนียบตามฝ่ายปฏิบัติงาน -->
             <div class="tab-pane fade" id="pills-operation">
                 <div id="operationContainer"></div>
             </div>
 
+            <!-- แท็บที่ 4: คณะครูที่ปรึกษา -->
             <div class="tab-pane fade" id="pills-advisor">
                 <div class="dept-title"><i class="fa-solid fa-users-gear me-3"></i>คณะครูที่ปรึกษาสภานักเรียน</div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="advisorGrid"></div>
@@ -1087,15 +1099,15 @@ window.onload = () => {
             currentFilteredAdvisors = filteredAdvisorsByYear;
         }
 
-        if(activeTab === 'pills-election-tab') {
-            renderElection(currentFilteredMembers);
+        // --- ระบบสลับแท็บจะทำงานโดยเรนเดอร์ข้อมูลเฉพาะแท็บที่เปิดอยู่ ---
+        if(activeTab === 'pills-activity-tab') {
             renderActivities(filteredActivities);
+        } else if(activeTab === 'pills-election-tab') {
+            renderElection(currentFilteredMembers);
         } else if(activeTab === 'pills-operation-tab') {
             renderOperation(currentFilteredMembers);
-            document.getElementById('activitySection').style.display = 'none';
         } else if(activeTab === 'pills-advisor-tab') {
             renderAdvisors(currentFilteredAdvisors); 
-            document.getElementById('activitySection').style.display = 'none';
         }
         
         adjustLongNames();
@@ -1106,8 +1118,14 @@ window.onload = () => {
         const section = document.getElementById('activitySection');
         
         if (!activities || activities.length === 0) {
-            section.style.display = 'none';
-            targetContainer.innerHTML = '';
+            section.style.display = 'block';
+            // แสดงข้อความรูปสวยๆ เมื่อปีการศึกษานั้นยังไม่มีรูปภาพกิจกรรม
+            targetContainer.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="no-data-icon-wrapper mb-3 mx-auto"><i class="fa-solid fa-images"></i></div>
+                    <div class="no-data-title text-muted">ยังไม่มีภาพประมวลผลงาน / กิจกรรม</div>
+                    <div class="text-muted" style="font-size: 0.9rem;">สำหรับปีการศึกษาที่เลือกในขณะนี้</div>
+                </div>`;
             return;
         }
         
