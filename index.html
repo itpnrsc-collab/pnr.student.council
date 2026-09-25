@@ -52,7 +52,7 @@
             letter-spacing: 0.1px;
         }
 
-        /* Navbar & Logos */
+        /* Navbar & Logos (เพิ่ม Transition และพฤติกรรมการเลื่อนซ่อน/แสดงอย่างลื่นไหล) */
         .navbar.sticky-top {
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
             will-change: transform;
@@ -177,7 +177,7 @@
         }
 
         /* Activities Zone */
-        .activity-zone-title { font-size: 1.35rem; color: var(--pn-blue); font-weight: 600; margin: 38px 0 26px 0; display: flex; align-items: center; }
+        .activity-zone-title { font-size: 1.35rem; color: var(--pn-blue); font-weight: 600; margin: 35px 0 26px 0; display: flex; align-items: center; }
         .activity-zone-title i { color: var(--pn-gold) !important; }
         .activity-zone-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--pn-line), transparent); margin-left: 20px; }
         .activity-wrapper { background: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--pn-line); margin-bottom: 32px; cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; }
@@ -306,7 +306,7 @@
             line-break: loose;
         }
 
-        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง --- */
+        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง (ใช้สีน้ำเงินโทนเดียวกับเว็บไซต์) --- */
         .scroll-top-btn {
             position: fixed;
             bottom: -60px;
@@ -540,7 +540,7 @@
 
 <nav class="navbar navbar-dark bg-pn sticky-top shadow py-2">
     <div class="container d-flex justify-content-between align-items-center navbar-container-custom">
-        <a class="navbar-brand d-flex align-items-center" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+        <a class="navbar-brand d-flex align-items-center" href="#">
             <img src="" id="schoolLogo" style="display:none">
             <img src="" id="scLogo" style="display:none">
             <div class="ms-2 ms-md-3 text-start">
@@ -584,6 +584,7 @@
 
 <div id="mainWebsiteContent" style="display: none;">
     <div class="container">
+        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน -->
         <div class="banner-container">
             <div id="mainBanner" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner" id="bannerItems"></div>
@@ -605,11 +606,11 @@
                         <input type="text" id="systemSearchInput" class="form-control border-2 border-start-0 ps-1" placeholder="พิมพ์ชื่อ, ตำแหน่ง..." oninput="handleSearchInput()">
                     </div>
                 </div>
-                <!-- ปรับแต่งส่วนของแท็บให้มี 4 แท็บ และเรียงข่าวสาร/กิจกรรมไว้เป็นอันดับแรกสุด -->
+                <!-- แถบเมนู Segmented Control ปรับเป็น 4 แท็บเรียงกัน (แท็บแรกสุดเป็นกิจกรรม & ข่าวสาร) -->
                 <div class="col-12 col-md-5 col-lg-7 mt-3 mt-md-0">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <button class="nav-link active" id="pills-activity-tab" data-bs-toggle="pill" data-bs-target="#pills-activity" type="button" onclick="updateView()"><i class="fa-solid fa-bullhorn me-1"></i>ข่าวสาร/กิจกรรม</button>
+                            <button class="nav-link active" id="pills-activity-tab" data-bs-toggle="pill" data-bs-target="#pills-activity" type="button" onclick="updateView()"><i class="fa-solid fa-star me-1"></i>กิจกรรม & ข่าวสาร</button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" id="pills-election-tab" data-bs-toggle="pill" data-bs-target="#pills-election" type="button" onclick="updateView()"><i class="fa-solid fa-vote-yea me-1"></i>วาระเลือกตั้ง</button>
@@ -626,33 +627,32 @@
         </div>
 
         <div class="tab-content mt-4 mt-md-5">
-            <!-- แท็บที่ 1: ข่าวสารและกิจกรรม (ถูกตั้งเป็นหน้าแรก Default) -->
+            <!-- แท็บที่ 1: กิจกรรม & ข่าวสาร (แท็บแรกสุด - ตั้งเป็นหน้าเริ่มต้นเมื่อเปิดเว็บ) -->
             <div class="tab-pane fade show active" id="pills-activity">
-                
-                <!-- ส่วนประกาศ / ข่าวสาร ถูกย้ายมาแสดงผลในแท็บนี้ -->
-                <div id="announcementSection" style="display:none; margin-bottom: 40px;">
+                <!-- กล่องประกาศ / ข่าวสารล่าสุด -->
+                <div id="announcementSection" style="display:none; margin-bottom: 30px;">
                     <div class="activity-zone-title mt-2 mb-4"><i class="fa-solid fa-bullhorn me-2"></i>ประกาศ / ข่าวสารล่าสุด</div>
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="announcementGrid"></div>
                 </div>
 
-                <!-- ส่วนภาพผลงานกิจกรรม -->
+                <!-- คลังภาพประมวลผลงานและกิจกรรมสภานักเรียน -->
                 <div id="activitySection" style="display:none;">
                     <div class="activity-zone-title"><i class="fa-solid fa-star me-2"></i>ภาพผลงานและกิจกรรมของสภานักเรียน</div>
                     <div id="activityRenderContainer"></div>
                 </div>
             </div>
 
-            <!-- แท็บที่ 2: ทำเนียบตามวาระเลือกตั้ง -->
+            <!-- แท็บที่ 2: วาระเลือกตั้ง -->
             <div class="tab-pane fade" id="pills-election">
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="electionGrid"></div>
             </div>
             
-            <!-- แท็บที่ 3: ทำเนียบตามฝ่ายปฏิบัติงาน -->
+            <!-- แท็บที่ 3: ฝ่ายปฏิบัติงาน -->
             <div class="tab-pane fade" id="pills-operation">
                 <div id="operationContainer"></div>
             </div>
 
-            <!-- แท็บที่ 4: คณะครูที่ปรึกษา -->
+            <!-- แท็บที่ 4: ครูที่ปรึกษา -->
             <div class="tab-pane fade" id="pills-advisor">
                 <div class="dept-title"><i class="fa-solid fa-users-gear me-3"></i>คณะครูที่ปรึกษาสภานักเรียน</div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="advisorGrid"></div>
@@ -1099,7 +1099,7 @@ window.onload = () => {
             currentFilteredAdvisors = filteredAdvisorsByYear;
         }
 
-        // --- ระบบสลับแท็บจะทำงานโดยเรนเดอร์ข้อมูลเฉพาะแท็บที่เปิดอยู่ ---
+        // --- ระบบเลือกเรนเดอร์ตามแท็บที่แอคทีฟ ---
         if(activeTab === 'pills-activity-tab') {
             renderActivities(filteredActivities);
         } else if(activeTab === 'pills-election-tab') {
@@ -1113,13 +1113,13 @@ window.onload = () => {
         adjustLongNames();
     }
 
+    // --- ฟังก์ชันเรนเดอร์ภาพกิจกรรม (ปรับปรุงตรรกะการเรียงลำดับใหม่) ---
     function renderActivities(activities) {
         const targetContainer = document.getElementById('activityRenderContainer');
         const section = document.getElementById('activitySection');
         
         if (!activities || activities.length === 0) {
             section.style.display = 'block';
-            // แสดงข้อความรูปสวยๆ เมื่อปีการศึกษานั้นยังไม่มีรูปภาพกิจกรรม
             targetContainer.innerHTML = `
                 <div class="text-center py-5">
                     <div class="no-data-icon-wrapper mb-3 mx-auto"><i class="fa-solid fa-images"></i></div>
@@ -1130,14 +1130,34 @@ window.onload = () => {
         }
         
         section.style.display = 'block';
-        const sortedActivities = [...activities].sort((a, b) => parseInt(b.Order_No || 0) - parseInt(a.Order_No || 0));
+        
+        // ตรรกะการจัดเรียงลำดับกิจกรรม:
+        // 1. รายการที่ไม่ได้ใส่ Order_No จะขึ้นก่อนเสมอ (ถือว่าเป็นกิจกรรมใหม่ล่าสุด) 
+        // 2. หากมีหลายรายการที่ไม่ระบุ Order_No จะเรียงให้กิจกรรมแถวล่างสุดใน Google ชีตขึ้นก่อน
+        // 3. รายการที่มี Order_No จะเรียงต่อท้ายจากเลขมาก (ใหม่) ไปหาเลขน้อย (เก่า)
+        const sortedActivities = [...activities].map((act, index) => {
+            const hasOrder = act.Order_No !== undefined && act.Order_No !== null && String(act.Order_No).trim() !== "";
+            return {
+                ...act,
+                _hasOrder: hasOrder,
+                _orderVal: hasOrder ? parseFloat(act.Order_No) : Number.POSITIVE_INFINITY,
+                _rowIndex: index
+            };
+        }).sort((a, b) => {
+            if (!a._hasOrder && !b._hasOrder) {
+                return b._rowIndex - a._rowIndex; // ไม่มีเลขทั้งคู่ -> แถวล่างสุดในชีตขึ้นก่อน
+            }
+            if (a._orderVal !== b._orderVal) {
+                return b._orderVal - a._orderVal; // เลขมากอยู่บน (ใหม่) -> เลขน้อยอยู่ล่าง (เก่า)
+            }
+            return b._rowIndex - a._rowIndex;
+        });
 
         targetContainer.innerHTML = sortedActivities.map((act, idx) => {
             const imageList = act.Photo_URLs ? act.Photo_URLs.split(',').map(img => img.trim()).filter(img => img !== "") : [];
             if(imageList.length === 0) imageList.push("https://via.placeholder.com/1200x375?text=No+Image+Available");
             
             const carouselId = `activityCarouselCtrl_${idx}`;
-            // ประมวลผลข้อความผ่าน Custom Parser ทุกจุดที่มาจาก Google ชีต
             const cleanTitle = act.Activity_Name ? parseCustomTokens(act.Activity_Name) : '';
             const cleanDetails = act.Details ? parseCustomTokens(act.Details) : 'ไม่มีรายละเอียดเพิ่มเติม';
 
@@ -1329,7 +1349,6 @@ window.onload = () => {
         
         let eduStatusHTML = '';
         if (m.Education_Status && m.Education_Status.toString().trim() !== '' && m.Education_Status.toString().trim() !== '-') {
-            // ทำการแปลงข้อความและครอบปุ่มด้วยคลาส gold-highlight-text พร้อมผูก Event สำหรับประกายระยิบระยับ
             let parsedEdu = parseCustomTokens(m.Education_Status);
             eduStatusHTML = `
                 <p class="mb-1 modal-edu-status-container">
@@ -1421,7 +1440,6 @@ window.onload = () => {
         el.style.whiteSpace = 'nowrap';
         
         if (el.scrollWidth > el.clientWidth) {
-            // ข้ามโครงสร้างถ้าหากมีการใส่ Markup ของระบบไว้เพื่อป้องกันปัญหาแท็กหลุดรุ่ย
             if (fullName.includes('<<') || fullName.includes('#')) {
                 el.style.whiteSpace = 'normal';
                 el.innerHTML = parseCustomTokens(fullName);
