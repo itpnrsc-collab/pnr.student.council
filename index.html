@@ -87,10 +87,77 @@
         .btn-social-mini.fb-mini:hover { background: #1877F2; border-color: #1877F2; }
         .btn-social-mini.ig-mini:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); border-color: #dc2743; }
 
-        /* Banner Container */
-        .banner-container { margin-top: 28px; margin-bottom: 28px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--pn-line); }
+        /* ================= ปรับปรุง CSS ส่วนของ Banner ================= */
+        .banner-container { 
+            margin-top: 28px; margin-bottom: 28px; border-radius: var(--radius-lg); 
+            overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--pn-line); 
+            position: relative; /* ให้ความสำคัญกับ relative สำหรับวางจุด */
+        }
         .ratio-16-5 { width: 100%; aspect-ratio: 16 / 5; object-fit: cover; }
-        .banner-link { cursor: pointer; display: block; }
+        
+        /* สไตล์สำหรับแบนเนอร์ที่มีลิงก์ */
+        .banner-link { 
+            cursor: pointer; 
+            display: block; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        /* เอฟเฟกต์ซูมภาพเมื่อเอาเมาส์ชี้ (เฉพาะรูปที่มีลิงก์) */
+        .banner-link img {
+            transition: transform 0.4s ease;
+        }
+        .banner-link:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ป้ายแจ้งเตือนลิงก์ (Call-to-Action Badge) */
+        .banner-cta-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(12, 42, 77, 0.85); /* สีน้ำเงินใสๆ */
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .banner-link:hover .banner-cta-badge {
+            background: var(--pn-blue); /* สีเข้มขึ้นเมื่อชี้ */
+            transform: translateY(-2px); /* เด้งขึ้นนิดนึง */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* ปรับแต่งจุดระบุตำแหน่งด้านล่าง (Carousel Indicators) */
+        .banner-carousel-indicators {
+            bottom: 10px;
+            margin-bottom: 0;
+            gap: 8px; /* ระยะห่างระหว่างจุด */
+        }
+        .banner-carousel-indicators [data-bs-target] {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .banner-carousel-indicators .active {
+            background-color: var(--pn-blue);
+            width: 30px; /* ยืดความกว้างเมื่อทำงาน */
+            border-radius: 10px;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+        }
+        /* ======================================================= */
 
         /* Announcements Zone */
         .ann-card { background: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--pn-line); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; height: 100%; display: flex; flex-direction: column; }
@@ -306,7 +373,7 @@
             line-break: loose;
         }
 
-        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง (ใช้สีน้ำเงินโทนเดียวกับเว็บไซต์) --- */
+        /* --- ปุ่ม Scroll-to-Top แบบลอยตัวมุมขวาล่าง --- */
         .scroll-top-btn {
             position: fixed;
             bottom: -60px;
@@ -505,6 +572,9 @@
             .text-maintenance-mobile { font-size: 3.8vw; }
             .no-data-text-responsive { font-size: 3.1vw; }
             .footer-address { font-size: 0.72rem; }
+            
+            /* ปรับขนาดป้ายแบนเนอร์มือถือ */
+            .banner-cta-badge { font-size: 0.75rem; padding: 4px 10px; top: 10px; right: 10px; }
         }
     </style>
 </head>
@@ -584,9 +654,12 @@
 
 <div id="mainWebsiteContent" style="display: none;">
     <div class="container">
-        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน -->
+        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน (อัปเดตเพิ่มจุด Indicator) -->
         <div class="banner-container">
             <div id="mainBanner" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <!-- จุดระบุตำแหน่ง (Dots) -->
+                <div class="carousel-indicators banner-carousel-indicators" id="bannerIndicators"></div>
+                <!-- รูปภาพแบนเนอร์ -->
                 <div class="carousel-inner" id="bannerItems"></div>
             </div>
         </div>
@@ -911,28 +984,52 @@ window.onload = () => {
         }
     }
 
+    // ================= อัปเดตฟังก์ชัน renderBanners =================
     function renderBanners(b) {
         const container = document.getElementById('bannerItems');
+        const indicatorsContainer = document.getElementById('bannerIndicators');
+
         if(!b || b.length === 0) {
             b = [{ imageUrl: "https://via.placeholder.com/1200x375?text=Student+Council", linkUrl: "" }];
         }
         
-        container.innerHTML = b.map((banner, i) => {
+        let itemsHtml = '';
+        let indicatorsHtml = '';
+        
+        b.forEach((banner, i) => {
             const hasLink = banner.linkUrl && banner.linkUrl.trim() !== "";
             const imgHtml = `<img src="${banner.imageUrl}" class="d-block w-100 ratio-16-5" decoding="async">`;
             
-            return `
-                <div class="carousel-item ${i===0?'active':''}" data-bs-interval="7000">
-                    ${hasLink ? `<a href="${banner.linkUrl}" target="_blank" class="banner-link">${imgHtml}</a>` : imgHtml}
+            // สร้างป้าย Call-to-Action หากมีลิงก์
+            const ctaHtml = hasLink 
+                ? `<div class="banner-cta-badge"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> เปิดลิงก์</div>` 
+                : '';
+            
+            // แทรกรูป (และลิงก์/ป้าย CTA)
+            itemsHtml += `
+                <div class="carousel-item ${i===0?'active':''}" data-bs-interval="5000">
+                    ${hasLink ? `<a href="${banner.linkUrl}" target="_blank" class="banner-link">${imgHtml}${ctaHtml}</a>` : imgHtml}
                 </div>
             `;
-        }).join('');
+            
+            // แทรกจุดบอกตำแหน่ง
+            indicatorsHtml += `
+                <button type="button" data-bs-target="#mainBanner" data-bs-slide-to="${i}" class="${i===0?'active':''}" aria-label="Slide ${i+1}"></button>
+            `;
+        });
+        
+        container.innerHTML = itemsHtml;
+        if (indicatorsContainer) {
+            indicatorsContainer.innerHTML = indicatorsHtml;
+        }
         
         const mainBannerEl = document.getElementById('mainBanner');
         if(mainBannerEl) {
-            new bootstrap.Carousel(mainBannerEl, { interval: 7000, ride: 'carousel' });
+            // ตั้งค่าเวลา 5000ms (5 วินาที) และหยุดเมื่อชี้เมาส์ (pause: 'hover')
+            new bootstrap.Carousel(mainBannerEl, { interval: 5000, ride: 'carousel', pause: 'hover' });
         }
     }
+    // =============================================================
 
     // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร ---
     function renderAnnouncements(anns) {
