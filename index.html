@@ -93,13 +93,7 @@
             overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--pn-line); 
             position: relative; /* ให้ความสำคัญกับ relative สำหรับวางจุด */
         }
-        
-        /* กำหนดสัดส่วนเริ่มต้นสำหรับจอคอมพิวเตอร์ (อ้างอิง 2048 x 640 พิกเซล -> 16:5) */
-        .ratio-16-5 { 
-            width: 100%; 
-            aspect-ratio: 16 / 5; 
-            object-fit: cover; 
-        }
+        .ratio-16-5 { width: 100%; aspect-ratio: 16 / 5; object-fit: cover; }
         
         /* สไตล์สำหรับแบนเนอร์ที่มีลิงก์ */
         .banner-link { 
@@ -535,8 +529,6 @@
         .skeleton-text-1 { width: 65%; height: 18px; background: var(--pn-blue-soft); margin: 20px auto 10px auto; border-radius: 4px; position: relative; overflow: hidden; }
         .skeleton-text-2 { width: 45%; height: 14px; background: var(--pn-blue-soft); margin: 0 auto 15px auto; border-radius: 4px; position: relative; overflow: hidden; }
         .skeleton-text-3 { width: 30%; height: 22px; background: var(--pn-blue-soft); margin: 0 auto 20px auto; border-radius: 20px; position: relative; overflow: hidden; }
-        
-        /* ปรับสัดส่วน skeleton-banner ให้สอดคล้องกับแบนเนอร์หลักทั้งบนคอมพิวเตอร์และมือถือ */
         .skeleton-banner { width: 100%; aspect-ratio: 16 / 5; background: var(--pn-blue-soft); border-radius: var(--radius-lg); position: relative; overflow: hidden; margin-top: 24px; margin-bottom: 24px; }
         
         .shimmer::after {
@@ -553,14 +545,6 @@
         }
         
         @media (max-width: 767.98px) {
-            /* ปรับเพิ่มความสูงของแบนเนอร์หลักในมือถือและหน้าจอเล็ก (เปลี่ยน aspect-ratio จาก 16:5 เป็น 16:9 เพื่อเพิ่มความสูงของรูปต้นฉบับ 2048x640 พิกเซลให้สูงขึ้นเต็มตาโดยไม่บิดเบี้ยว) */
-            .ratio-16-5 {
-                aspect-ratio: 16 / 9 !important;
-            }
-            .skeleton-banner {
-                aspect-ratio: 16 / 9 !important;
-            }
-
             .welcome-message-body { font-size: 0.76rem; line-height: 1.5; }
             .welcome-popup-modal .modal-content { padding: 35px 15px; }
             .welcome-headline { font-size: 1.4rem; }
@@ -670,7 +654,7 @@
 
 <div id="mainWebsiteContent" style="display: none;">
     <div class="container">
-        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน -->
+        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน (อัปเดตเพิ่มจุด Indicator) -->
         <div class="banner-container">
             <div id="mainBanner" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <!-- จุดระบุตำแหน่ง (Dots) -->
@@ -795,7 +779,7 @@
     </div>
 </div>
 
-<!-- Modal สำหรับประกาศข่าวสาร -->
+<!-- Modal สำหรับประกาศข่าวสาร (อัปเดตเพิ่มส่วนปุ่มลิงก์) -->
 <div class="modal fade" id="announcementDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -1013,7 +997,7 @@ window.onload = () => {
         const indicatorsContainer = document.getElementById('bannerIndicators');
 
         if(!b || b.length === 0) {
-            b = [{ imageUrl: "https://via.placeholder.com/2048x640?text=Student+Council", linkUrl: "" }];
+            b = [{ imageUrl: "https://via.placeholder.com/1200x375?text=Student+Council", linkUrl: "" }];
         }
         
         let itemsHtml = '';
@@ -1290,7 +1274,7 @@ window.onload = () => {
 
         targetContainer.innerHTML = sortedActivities.map((act, idx) => {
             const imageList = act.Photo_URLs ? act.Photo_URLs.split(',').map(img => img.trim()).filter(img => img !== "") : [];
-            if(imageList.length === 0) imageList.push("https://via.placeholder.com/2048x640?text=No+Image+Available");
+            if(imageList.length === 0) imageList.push("https://via.placeholder.com/1200x375?text=No+Image+Available");
             
             const carouselId = `activityCarouselCtrl_${idx}`;
             const cleanTitle = act.Activity_Name ? parseCustomTokens(act.Activity_Name) : '';
@@ -1596,3 +1580,4 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
