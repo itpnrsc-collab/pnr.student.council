@@ -94,12 +94,11 @@
             position: relative; /* ให้ความสำคัญกับ relative สำหรับวางจุด */
         }
         
-        /* กำหนดสัดส่วนเริ่มต้นสำหรับจอคอมพิวเตอร์ (16:5.2 หรืออิงจาก 2048x640) */
+        /* กำหนดสัดส่วนเริ่มต้นสำหรับจอคอมพิวเตอร์ (อ้างอิง 2048 x 640 พิกเซล -> 16:5) */
         .ratio-16-5 { 
             width: 100%; 
             aspect-ratio: 16 / 5; 
-            object-fit: contain; 
-            background-color: #f3f5f8;
+            object-fit: cover; 
         }
         
         /* สไตล์สำหรับแบนเนอร์ที่มีลิงก์ */
@@ -536,6 +535,8 @@
         .skeleton-text-1 { width: 65%; height: 18px; background: var(--pn-blue-soft); margin: 20px auto 10px auto; border-radius: 4px; position: relative; overflow: hidden; }
         .skeleton-text-2 { width: 45%; height: 14px; background: var(--pn-blue-soft); margin: 0 auto 15px auto; border-radius: 4px; position: relative; overflow: hidden; }
         .skeleton-text-3 { width: 30%; height: 22px; background: var(--pn-blue-soft); margin: 0 auto 20px auto; border-radius: 20px; position: relative; overflow: hidden; }
+        
+        /* ปรับสัดส่วน skeleton-banner ให้สอดคล้องกับแบนเนอร์หลักทั้งบนคอมพิวเตอร์และมือถือ */
         .skeleton-banner { width: 100%; aspect-ratio: 16 / 5; background: var(--pn-blue-soft); border-radius: var(--radius-lg); position: relative; overflow: hidden; margin-top: 24px; margin-bottom: 24px; }
         
         .shimmer::after {
@@ -552,7 +553,7 @@
         }
         
         @media (max-width: 767.98px) {
-            /* ปรับเพิ่มความสูงของแบนเนอร์หลักในมือถือ/หน้าจอเล็ก โดยเปลี่ยน aspect-ratio ให้สูงขึ้น (เช่น 16 / 9) เพื่อให้รูปภาพสูงขึ้นและไม่แบน โดยไม่บิดเบี้ยว */
+            /* ปรับเพิ่มความสูงของแบนเนอร์หลักในมือถือและหน้าจอเล็ก (เปลี่ยน aspect-ratio จาก 16:5 เป็น 16:9 เพื่อเพิ่มความสูงของรูปต้นฉบับ 2048x640 พิกเซลให้สูงขึ้นเต็มตาโดยไม่บิดเบี้ยว) */
             .ratio-16-5 {
                 aspect-ratio: 16 / 9 !important;
             }
@@ -794,7 +795,7 @@
     </div>
 </div>
 
-<!-- Modal สำหรับประกาศข่าวสาร (อัปเดตเพิ่มส่วนปุ่มลิงก์) -->
+<!-- Modal สำหรับประกาศข่าวสาร -->
 <div class="modal fade" id="announcementDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
