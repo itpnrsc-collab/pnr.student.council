@@ -779,7 +779,7 @@
     </div>
 </div>
 
-<!-- Modal สำหรับประกาศข่าวสาร -->
+<!-- Modal สำหรับประกาศข่าวสาร (อัปเดตเพิ่มส่วนปุ่มลิงก์) -->
 <div class="modal fade" id="announcementDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -792,6 +792,13 @@
                 <div id="modalAnnDate" class="small fw-bold mb-3" style="color:var(--pn-gold);"></div>
                 <img id="modalAnnImage" src="" alt="ภาพประกาศ" class="shadow-sm" style="width: 100%; border-radius: var(--radius-sm); margin-bottom: 20px; display: none;">
                 <div id="modalAnnDetails" class="activity-detail-paragraph">รายละเอียดประกาศ...</div>
+                
+                <!-- ส่วนปุ่มลิงก์ปลายทาง (ซ่อนไว้ก่อน ถ้ามีลิงก์จะถูกเปิดแสดงขึ้นมา) -->
+                <div id="modalAnnLinkWrap" class="mt-4" style="display:none;">
+                    <a href="#" id="modalAnnLinkBtn" target="_blank" class="btn btn-outline-primary w-100 fw-bold" style="border-radius: var(--radius-sm); padding: 10px;">
+                        <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>เปิดลิงก์ที่เกี่ยวข้อง
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -1031,7 +1038,7 @@ window.onload = () => {
     }
     // =============================================================
 
-    // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร ---
+    // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร (อัปเดตเพิ่ม Link_URL) ---
     function renderAnnouncements(anns) {
         const section = document.getElementById('announcementSection');
         const grid = document.getElementById('announcementGrid');
@@ -1055,6 +1062,12 @@ window.onload = () => {
             const details = ann.Details ? parseCustomTokens(ann.Details) : '';
             const img = ann.Image_URL || '';
             const format = ann.Format || 'Image+Text';
+            const hasLink = ann.Link_URL && ann.Link_URL.trim() !== "";
+            
+            // หากมีลิงก์ จะแสดงป้าย badge เล็กๆ หลังหัวข้อข่าวสาร
+            const linkBadgeHtml = hasLink 
+                ? `<span class="badge" style="background:var(--pn-blue-soft); color:var(--pn-blue); border:1px solid var(--pn-line); font-size:0.7rem; margin-left:6px; vertical-align:middle;"><i class="fa-solid fa-link"></i></span>` 
+                : '';
             
             let imgHtml = '';
             if ((format === 'Image+Text' || format === 'Image') && img) {
@@ -1076,7 +1089,7 @@ window.onload = () => {
                         ${imgHtml}
                         <div class="ann-body">
                             ${date ? `<div class="ann-date"><i class="fa-regular fa-calendar me-1"></i> ${date}</div>` : ''}
-                            <div class="ann-title">${title}</div>
+                            <div class="ann-title">${title}${linkBadgeHtml}</div>
                             ${descHtml}
                         </div>
                     </div>
@@ -1085,7 +1098,7 @@ window.onload = () => {
         }).join('');
     }
 
-    // --- ฟังก์ชันเปิดหน้าต่างรายละเอียดประกาศ ---
+    // --- ฟังก์ชันเปิดหน้าต่างรายละเอียดประกาศ (อัปเดตเพิ่ม Link_URL) ---
     function openAnnouncement(idx) {
         const published = rawAnnouncements.filter(a => a.Status === 'Published').reverse();
         const ann = published[idx];
@@ -1102,6 +1115,15 @@ window.onload = () => {
         } else {
             imgEl.style.display = 'none';
             imgEl.src = '';
+        }
+
+        // ตรวจสอบว่าประกาศนี้มีลิงก์ปลายทางหรือไม่
+        if (ann.Link_URL && ann.Link_URL.trim() !== '') {
+            document.getElementById('modalAnnLinkBtn').href = ann.Link_URL;
+            document.getElementById('modalAnnLinkWrap').style.display = 'block';
+        } else {
+            document.getElementById('modalAnnLinkWrap').style.display = 'none';
+            document.getElementById('modalAnnLinkBtn').href = '#';
         }
 
         new bootstrap.Modal(document.getElementById('announcementDetailModal')).show();
