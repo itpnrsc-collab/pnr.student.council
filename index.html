@@ -779,7 +779,7 @@
     </div>
 </div>
 
-<!-- Modal สำหรับประกาศข่าวสาร (อัปเดตเพิ่มส่วนปุ่มลิงก์) -->
+<!-- Modal สำหรับประกาศข่าวสาร -->
 <div class="modal fade" id="announcementDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -793,7 +793,6 @@
                 <img id="modalAnnImage" src="" alt="ภาพประกาศ" class="shadow-sm" style="width: 100%; border-radius: var(--radius-sm); margin-bottom: 20px; display: none;">
                 <div id="modalAnnDetails" class="activity-detail-paragraph">รายละเอียดประกาศ...</div>
                 
-                <!-- ส่วนปุ่มลิงก์ปลายทาง (ซ่อนไว้ก่อน ถ้ามีลิงก์จะถูกเปิดแสดงขึ้นมา) -->
                 <div id="modalAnnLinkWrap" class="mt-4" style="display:none;">
                     <a href="#" id="modalAnnLinkBtn" target="_blank" class="btn btn-outline-primary w-100 fw-bold" style="border-radius: var(--radius-sm); padding: 10px;">
                         <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>เปิดลิงก์ที่เกี่ยวข้อง
@@ -1038,7 +1037,7 @@ window.onload = () => {
     }
     // =============================================================
 
-    // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร (อัปเดตเพิ่ม Link_URL) ---
+    // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร ---
     function renderAnnouncements(anns) {
         const section = document.getElementById('announcementSection');
         const grid = document.getElementById('announcementGrid');
@@ -1048,12 +1047,19 @@ window.onload = () => {
             return;
         }
         
-        // กรองเฉพาะ Published และสลับให้ข่าวใหม่สุดขึ้นก่อน
-        const published = anns.filter(a => a.Status === 'Published').reverse();
+        // กรองเฉพาะ Published
+        let published = anns.filter(a => a.Status === 'Published').reverse();
         if (published.length === 0) {
             section.style.display = 'none';
             return;
         }
+
+        // เรียงลำดับข่าวปักหมุดไว้บนสุด
+        published.sort((a, b) => {
+            const pinA = String(a.Is_Pinned).toUpperCase() === 'TRUE';
+            const pinB = String(b.Is_Pinned).toUpperCase() === 'TRUE';
+            return (pinA === pinB) ? 0 : pinA ? -1 : 1;
+        });
         
         section.style.display = 'block';
         grid.innerHTML = published.map((ann, idx) => {
@@ -1063,10 +1069,15 @@ window.onload = () => {
             const img = ann.Image_URL || '';
             const format = ann.Format || 'Image+Text';
             const hasLink = ann.Link_URL && ann.Link_URL.trim() !== "";
+            const isPinned = String(ann.Is_Pinned).toUpperCase() === 'TRUE';
             
             // หากมีลิงก์ จะแสดงป้าย badge เล็กๆ หลังหัวข้อข่าวสาร
             const linkBadgeHtml = hasLink 
                 ? `<span class="badge" style="background:var(--pn-blue-soft); color:var(--pn-blue); border:1px solid var(--pn-line); font-size:0.7rem; margin-left:6px; vertical-align:middle;"><i class="fa-solid fa-link"></i></span>` 
+                : '';
+
+            const pinnedHtml = isPinned 
+                ? `<span class="badge bg-danger mb-2" style="font-size: 0.75rem;"><i class="fa-solid fa-thumbtack me-1"></i>ประกาศสำคัญ</span>`
                 : '';
             
             let imgHtml = '';
@@ -1085,9 +1096,10 @@ window.onload = () => {
 
             return `
                 <div class="col">
-                    <div class="ann-card" onclick="openAnnouncement(${idx})">
+                    <div class="ann-card" onclick="openAnnouncement('${escapeHtml(ann.Title || '')}')">
                         ${imgHtml}
                         <div class="ann-body">
+                            ${pinnedHtml}
                             ${date ? `<div class="ann-date"><i class="fa-regular fa-calendar me-1"></i> ${date}</div>` : ''}
                             <div class="ann-title">${title}${linkBadgeHtml}</div>
                             ${descHtml}
@@ -1098,10 +1110,10 @@ window.onload = () => {
         }).join('');
     }
 
-    // --- ฟังก์ชันเปิดหน้าต่างรายละเอียดประกาศ (อัปเดตเพิ่ม Link_URL) ---
-    function openAnnouncement(idx) {
-        const published = rawAnnouncements.filter(a => a.Status === 'Published').reverse();
-        const ann = published[idx];
+    // --- ฟังก์ชันเปิดหน้าต่างรายละเอียดประกาศ ---
+    function openAnnouncement(titleSearch) {
+        const published = rawAnnouncements.filter(a => a.Status === 'Published');
+        const ann = published.find(a => a.Title === titleSearch);
         if(!ann) return;
 
         document.getElementById('modalAnnTitle').innerHTML = ann.Title ? parseCustomTokens(ann.Title) : '-';
@@ -1232,12 +1244,15 @@ window.onload = () => {
         adjustLongNames();
     }
 
-    // --- ฟังก์ชันเรนเดอร์ภาพกิจกรรม (ปรับปรุงตรรกะการเรียงลำดับใหม่) ---
+    // --- ฟังก์ชันเรนเดอร์ภาพกิจกรรม ---
     function renderActivities(activities) {
         const targetContainer = document.getElementById('activityRenderContainer');
         const section = document.getElementById('activitySection');
         
-        if (!activities || activities.length === 0) {
+        // กรองเฉพาะกิจกรรมที่สถานะเป็น 'Published'
+        const publishedActivities = activities.filter(a => a.Status === 'Published');
+        
+        if (!publishedActivities || publishedActivities.length === 0) {
             section.style.display = 'block';
             targetContainer.innerHTML = `
                 <div class="text-center py-5">
@@ -1250,29 +1265,14 @@ window.onload = () => {
         
         section.style.display = 'block';
         
-        // ตรรกะการจัดเรียงลำดับกิจกรรม:
-        // 1. รายการที่ไม่ได้ใส่ Order_No จะขึ้นก่อนเสมอ (ถือว่าเป็นกิจกรรมใหม่ล่าสุด) 
-        // 2. หากมีหลายรายการที่ไม่ระบุ Order_No จะเรียงให้กิจกรรมแถวล่างสุดใน Google ชีตขึ้นก่อน
-        // 3. รายการที่มี Order_No จะเรียงต่อท้ายจากเลขมาก (ใหม่) ไปหาเลขน้อย (เก่า)
-        const sortedActivities = [...activities].map((act, index) => {
-            const hasOrder = act.Order_No !== undefined && act.Order_No !== null && String(act.Order_No).trim() !== "";
-            return {
-                ...act,
-                _hasOrder: hasOrder,
-                _orderVal: hasOrder ? parseFloat(act.Order_No) : Number.POSITIVE_INFINITY,
-                _rowIndex: index
-            };
-        }).sort((a, b) => {
-            if (!a._hasOrder && !b._hasOrder) {
-                return b._rowIndex - a._rowIndex; // ไม่มีเลขทั้งคู่ -> แถวล่างสุดในชีตขึ้นก่อน
-            }
-            if (a._orderVal !== b._orderVal) {
-                return b._orderVal - a._orderVal; // เลขมากอยู่บน (ใหม่) -> เลขน้อยอยู่ล่าง (เก่า)
-            }
-            return b._rowIndex - a._rowIndex;
+        // เรียงลำดับตามวันที่ (ใหม่สุดขึ้นก่อน)
+        publishedActivities.sort((a, b) => {
+             const dateA = a.Activity_Date ? parseDateString(a.Activity_Date) : new Date(0);
+             const dateB = b.Activity_Date ? parseDateString(b.Activity_Date) : new Date(0);
+             return dateB - dateA;
         });
 
-        targetContainer.innerHTML = sortedActivities.map((act, idx) => {
+        targetContainer.innerHTML = publishedActivities.map((act, idx) => {
             const imageList = act.Photo_URLs ? act.Photo_URLs.split(',').map(img => img.trim()).filter(img => img !== "") : [];
             if(imageList.length === 0) imageList.push("https://via.placeholder.com/1200x375?text=No+Image+Available");
             
@@ -1298,12 +1298,24 @@ window.onload = () => {
             `;
         }).join('');
 
-        sortedActivities.forEach((act, idx) => {
+        publishedActivities.forEach((act, idx) => {
             const carouselEl = document.getElementById(`activityCarouselCtrl_${idx}`);
             if (carouselEl) {
                 new bootstrap.Carousel(carouselEl, { interval: 7000, ride: 'carousel' });
             }
         });
+    }
+    
+    // แปลงสตริง วัน/เดือน/ปี ให้อยู่ในรูปแบบ Date Object เพื่อเรียงลำดับ
+    function parseDateString(dateStr) {
+        if (!dateStr) return new Date(0);
+        const parts = String(dateStr).split('/');
+        if (parts.length === 3) {
+            let year = parseInt(parts[2], 10);
+            if (year > 2500) year -= 543; // แปลง พ.ศ. เป็น ค.ศ. ถ้าจำเป็น
+            return new Date(year, parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+        }
+        return new Date(0); // หากรูปแบบผิด
     }
 
     function openActivityDetails(encodedTitle, encodedDetails) {
@@ -1580,4 +1592,3 @@ window.onload = () => {
 </script>
 </body>
 </html>
-
