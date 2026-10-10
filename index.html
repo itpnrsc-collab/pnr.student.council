@@ -10,7 +10,7 @@
     <meta name="keywords" content="สภานักเรียนโรงเรียนพระนารายณ์, สภานักเรียน, โรงเรียนพระนารายณ์, คณะกรรมการนักเรียน, PNR Student Council, การเลือกตั้งสภานักเรียน, โรงเรียนพระนารายณ์, ลพบุรี">
     <!-- ================================================== -->
 
-<meta name="google-site-verification" content="8syl9XZovQu8gz0h0fSiHrNcdXHCUfnFE4lhO7UQ6Ag"/>
+    <meta name="google-site-verification" content="8syl9XZovQu8gz0h0fSiHrNcdXHCUfnFE4lhO7UQ6Ag"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -91,11 +91,10 @@
         .banner-container { 
             margin-top: 28px; margin-bottom: 28px; border-radius: var(--radius-lg); 
             overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--pn-line); 
-            position: relative; /* ให้ความสำคัญกับ relative สำหรับวางจุด */
+            position: relative;
         }
         .ratio-16-5 { width: 100%; aspect-ratio: 16 / 5; object-fit: cover; }
         
-        /* สไตล์สำหรับแบนเนอร์ที่มีลิงก์ */
         .banner-link { 
             cursor: pointer; 
             display: block; 
@@ -103,7 +102,6 @@
             overflow: hidden; 
         }
         
-        /* เอฟเฟกต์ซูมภาพเมื่อเอาเมาส์ชี้ (เฉพาะรูปที่มีลิงก์) */
         .banner-link img {
             transition: transform 0.4s ease;
         }
@@ -111,12 +109,11 @@
             transform: scale(1.02);
         }
 
-        /* ป้ายแจ้งเตือนลิงก์ (Call-to-Action Badge) */
         .banner-cta-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(12, 42, 77, 0.85); /* สีน้ำเงินใสๆ */
+            background: rgba(12, 42, 77, 0.85);
             color: #fff;
             padding: 6px 14px;
             border-radius: 20px;
@@ -130,16 +127,15 @@
             z-index: 10;
         }
         .banner-link:hover .banner-cta-badge {
-            background: var(--pn-blue); /* สีเข้มขึ้นเมื่อชี้ */
-            transform: translateY(-2px); /* เด้งขึ้นนิดนึง */
+            background: var(--pn-blue);
+            transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
-        /* ปรับแต่งจุดระบุตำแหน่งด้านล่าง (Carousel Indicators) */
         .banner-carousel-indicators {
             bottom: 10px;
             margin-bottom: 0;
-            gap: 8px; /* ระยะห่างระหว่างจุด */
+            gap: 8px;
         }
         .banner-carousel-indicators [data-bs-target] {
             width: 10px;
@@ -153,11 +149,10 @@
         }
         .banner-carousel-indicators .active {
             background-color: var(--pn-blue);
-            width: 30px; /* ยืดความกว้างเมื่อทำงาน */
+            width: 30px;
             border-radius: 10px;
             border: 1.5px solid rgba(255, 255, 255, 0.9);
         }
-        /* ======================================================= */
 
         /* Announcements Zone */
         .ann-card { background: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--pn-line); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; height: 100%; display: flex; flex-direction: column; position: relative; }
@@ -168,7 +163,6 @@
         .ann-title { font-size: 1.1rem; font-weight: 600; color: var(--pn-blue); line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .ann-desc { font-size: 0.95rem; color: var(--pn-ink-soft); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0; line-height: 1.6; }
         
-        /* สัญลักษณ์ปักหมุดมุมขวาบนของข่าว */
         .ann-pin-badge {
             position: absolute;
             top: 12px;
@@ -436,13 +430,11 @@
             user-select: none;
         }
 
-        /* เอฟเฟกต์ Glow มีมิติเมื่อเลื่อนผ่านหรือสัมผัส */
         .gold-highlight-text:hover, .gold-highlight-text:active {
             text-shadow: 0 0 8px rgba(156, 124, 72, 0.55), 0 0 15px rgba(156, 124, 72, 0.28);
             transform: scale(1.02);
         }
 
-        /* คอนเทนเนอร์ประกายวิบวับระยิบระยับ (Sparkles Effect) */
         .sparkle-element {
             position: absolute;
             pointer-events: none;
@@ -592,7 +584,6 @@
             .no-data-text-responsive { font-size: 3.1vw; }
             .footer-address { font-size: 0.72rem; }
             
-            /* ปรับขนาดป้ายแบนเนอร์มือถือ */
             .banner-cta-badge { font-size: 0.75rem; padding: 4px 10px; top: 10px; right: 10px; }
         }
     </style>
@@ -673,12 +664,10 @@
 
 <div id="mainWebsiteContent" style="display: none;">
     <div class="container">
-        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน (อัปเดตเพิ่มจุด Indicator) -->
+        <!-- แบนเนอร์สไลด์ใหญ่ด้านบน -->
         <div class="banner-container">
             <div id="mainBanner" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                <!-- จุดระบุตำแหน่ง (Dots) -->
                 <div class="carousel-indicators banner-carousel-indicators" id="bannerIndicators"></div>
-                <!-- รูปภาพแบนเนอร์ -->
                 <div class="carousel-inner" id="bannerItems"></div>
             </div>
         </div>
@@ -689,7 +678,8 @@
             <div class="row align-items-end g-3">
                 <div class="col-6 col-md-3 col-lg-2">
                     <label class="form-label fw-bold text-muted mb-1" style="font-size: 0.9rem;"><i class="fa-solid fa-calendar-days me-2"></i>ปีการศึกษา</label>
-                    <select class="form-select border-2" id="yearSelector" onchange="updateView()"></select>
+                    <!-- เปลี่ยนมาเรียกใช้ onYearChange() เพื่อดึงข้อมูล API ตามปี -->
+                    <select class="form-select border-2" id="yearSelector" onchange="onYearChange()"></select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-3">
                     <label class="form-label fw-bold text-muted mb-1" style="font-size: 0.9rem;"><i class="fa-solid fa-magnifying-glass me-2"></i>ค้นหา</label>
@@ -698,7 +688,6 @@
                         <input type="text" id="systemSearchInput" class="form-control border-2 border-start-0 ps-1" placeholder="พิมพ์ชื่อ, ตำแหน่ง..." oninput="handleSearchInput()">
                     </div>
                 </div>
-                <!-- แถบเมนู Segmented Control ปรับเป็น 4 แท็บเรียงกัน (แท็บแรกสุดเป็นกิจกรรม & ข่าวสาร) -->
                 <div class="col-12 col-md-5 col-lg-7 mt-3 mt-md-0">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
@@ -719,32 +708,22 @@
         </div>
 
         <div class="tab-content mt-4 mt-md-5">
-            <!-- แท็บที่ 1: กิจกรรม & ข่าวสาร (แท็บแรกสุด - ตั้งเป็นหน้าเริ่มต้นเมื่อเปิดเว็บ) -->
             <div class="tab-pane fade show active" id="pills-activity">
-                <!-- กล่องประกาศ / ข่าวสารล่าสุด -->
                 <div id="announcementSection" style="display:none; margin-bottom: 30px;">
                     <div class="activity-zone-title mt-2 mb-4"><i class="fa-solid fa-bullhorn me-2"></i>ประกาศ / ข่าวสารล่าสุด</div>
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="announcementGrid"></div>
                 </div>
-
-                <!-- คลังภาพประมวลผลงานและกิจกรรมสภานักเรียน -->
                 <div id="activitySection" style="display:none;">
                     <div class="activity-zone-title"><i class="fa-solid fa-star me-2"></i>ภาพผลงานและกิจกรรมของสภานักเรียน</div>
                     <div id="activityRenderContainer"></div>
                 </div>
             </div>
-
-            <!-- แท็บที่ 2: วาระเลือกตั้ง -->
             <div class="tab-pane fade" id="pills-election">
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="electionGrid"></div>
             </div>
-            
-            <!-- แท็บที่ 3: ฝ่ายปฏิบัติงาน -->
             <div class="tab-pane fade" id="pills-operation">
                 <div id="operationContainer"></div>
             </div>
-
-            <!-- แท็บที่ 4: ครูที่ปรึกษา -->
             <div class="tab-pane fade" id="pills-advisor">
                 <div class="dept-title"><i class="fa-solid fa-users-gear me-3"></i>คณะครูที่ปรึกษาสภานักเรียน</div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4" id="advisorGrid"></div>
@@ -768,7 +747,6 @@
     </div>
 </footer>
 
-<!-- ปุ่มเลื่อนกลับสู่ด้านบนอัจฉริยะ (Scroll-to-Top Floating Button) -->
 <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()" aria-label="Scroll to top">
     <i class="fa-solid fa-arrow-up"></i>
 </button>
@@ -798,7 +776,6 @@
     </div>
 </div>
 
-<!-- Modal สำหรับประกาศข่าวสาร (อัปเดตเพิ่มส่วนปุ่มลิงก์) -->
 <div class="modal fade" id="announcementDetailModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -812,7 +789,6 @@
                 <img id="modalAnnImage" src="" alt="ภาพประกาศ" class="shadow-sm" style="width: 100%; border-radius: var(--radius-sm); margin-bottom: 20px; display: none;">
                 <div id="modalAnnDetails" class="activity-detail-paragraph">รายละเอียดประกาศ...</div>
                 
-                <!-- ส่วนปุ่มลิงก์ปลายทาง (ซ่อนไว้ก่อน ถ้ามีลิงก์จะถูกเปิดแสดงขึ้นมา) -->
                 <div id="modalAnnLinkWrap" class="mt-4" style="display:none;">
                     <a href="#" id="modalAnnLinkBtn" target="_blank" class="btn btn-outline-primary w-100 fw-bold" style="border-radius: var(--radius-sm); padding: 10px;">
                         <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>เปิดลิงก์ที่เกี่ยวข้อง
@@ -859,50 +835,105 @@
     
     let currentFilteredMembers = [];
     let currentFilteredAdvisors = [];
-    
-    // ตัวแปรเก็บเวลาหน่วงสำหรับระบบ Debounce ค้นหา
     let searchTimeout = null;
+    let isFirstLoad = true;
+    let currentFetchId = 0; // ป้องกัน Race Condition เมื่อกดสลับปีรัวๆ
 
-// วาง URL ที่ได้จากการ Deploy Web App ของ Google Apps Script ที่นี่
-const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxNj3EnT09hg_Jc24AvaX7V7dPY0ca6s6FxXP2ZKP_TwkFeoVLwPOnIJUgAkbvuItqN/exec?type=api';
+    // วาง URL ที่ได้จากการ Deploy Web App ของ Google Apps Script ที่นี่
+    const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxNj3EnT09hg_Jc24AvaX7V7dPY0ca6s6FxXP2ZKP_TwkFeoVLwPOnIJUgAkbvuItqN/exec?type=api';
 
-window.onload = () => {
-    fetch(GAS_API_URL)
-        .then(response => response.json())
-        .then(data => {
-            if (data.fbLink) document.getElementById('scFacebookLink').href = data.fbLink;
-            if (data.igLink) document.getElementById('scInstagramLink').href = data.igLink;
+    // โหลดข้อมูลอัตโนมัติเมื่อเปิดเว็บ (โดยส่งค่า null ไปเพื่อให้ Backend ประมวลผลหาปีล่าสุดส่งกลับมาเอง)
+    window.onload = () => {
+        fetchDataByYear(null);
+    };
 
-            // ตรวจสอบ URL Parameter ?view=admin
-            const urlParams = new URLSearchParams(window.location.search);
-            const isAdminView = urlParams.get('view') === 'admin';
+    // --- ฟังก์ชันดึงข้อมูลแยกตามปีการศึกษาและจัดการ Skeleton Loader ---
+    function fetchDataByYear(yearToFetch) {
+        currentFetchId++;
+        const thisFetchId = currentFetchId;
 
-            // หาก isClosed เป็น true และไม่มี ?view=admin ให้แสดงหน้าแจ้งปิดปรับปรุง
-            if(data.isClosed && !isAdminView) {
-                document.getElementById('loadingSkeletonContainer').style.display = 'none';
-                document.getElementById('maintenanceScreen').style.display = 'flex';
+        // แสดง Skeleton Loader ก่อนเริ่มดึงข้อมูล
+        document.getElementById('loadingSkeletonContainer').style.display = 'block';
+        document.getElementById('mainWebsiteContent').style.display = 'none';
+
+        let url = GAS_API_URL;
+        if (yearToFetch) {
+            url += `&year=${yearToFetch}`;
+        }
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // หากผู้ใช้สลับปีรัวๆ ให้สนใจเฉพาะคำตอบที่ใหม่ที่สุด
+                if (thisFetchId !== currentFetchId) return;
+
+                if (data.fbLink) document.getElementById('scFacebookLink').href = data.fbLink;
+                if (data.igLink) document.getElementById('scInstagramLink').href = data.igLink;
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const isAdminView = urlParams.get('view') === 'admin';
+
+                // กรณีปิดปรับปรุงเว็บไซต์
+                if(data.isClosed && !isAdminView) {
+                    document.getElementById('loadingSkeletonContainer').style.display = 'none';
+                    document.getElementById('maintenanceScreen').style.display = 'flex';
+                    setupLogos(data.schoolLogo, data.councilLogo);
+                    return; 
+                }
+
+                // รับข้อมูลที่ถูกกรองตามปีแล้วจาก Backend
+                rawMembers = data.members || [];
+                rawActivities = data.activities || [];
+                rawAdvisors = data.advisors || []; 
+                rawAnnouncements = data.announcements || [];
+                
+                // อัปเดต Dropdown ปีการศึกษาจากข้อมูล Available Years และตั้งค่าเริ่มต้น
+                currentYear = data.selectedYear;
+                renderYearSelector(data.availableYears || [], currentYear);
+                
                 setupLogos(data.schoolLogo, data.councilLogo);
-                return; 
-            }
+                renderBanners(data.banners);
+                renderAnnouncements(rawAnnouncements);
+                
+                // สั่ง Render ข้อมูลใน Tab 
+                updateView();
 
-            document.getElementById('loadingSkeletonContainer').style.display = 'none';
-            document.getElementById('mainWebsiteContent').style.display = 'block';
+                // แทนที่ Skeleton ด้วยข้อมูลจริงอย่างราบรื่น
+                document.getElementById('loadingSkeletonContainer').style.display = 'none';
+                document.getElementById('mainWebsiteContent').style.display = 'block';
 
-            const myWelcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
-            myWelcomeModal.show();
+                // แสดง Popup ต้อนรับในครั้งแรกที่เข้าเว็บไซต์
+                if (isFirstLoad) {
+                    const myWelcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
+                    myWelcomeModal.show();
+                    isFirstLoad = false;
+                }
+            })
+            .catch(err => {
+                if (thisFetchId !== currentFetchId) return;
+                console.error('Error fetching data:', err);
+                document.getElementById('loadingSkeletonContainer').style.display = 'none';
+                alert('เกิดข้อผิดพลาดในการโหลดข้อมูล กรุณาลองใหม่อีกครั้ง');
+            });
+    }
 
-            rawMembers = data.members || [];
-            rawActivities = data.activities || [];
-            rawAdvisors = data.advisors || []; 
-            rawAnnouncements = data.announcements || [];
-            
-            setupLogos(data.schoolLogo, data.councilLogo);
-            renderBanners(data.banners);
-            renderAnnouncements(rawAnnouncements);
-            initYearSelector();
-        })
-        .catch(err => console.error('Error fetching data:', err));
-};
+    // สร้างเมนู Dropdown เลือกระบบปีการศึกษา
+    function renderYearSelector(years, selectedYear) {
+        const selector = document.getElementById('yearSelector');
+        if (!years || years.length === 0) {
+            selector.innerHTML = `<option value="">ไม่มีข้อมูล</option>`;
+            return;
+        }
+        selector.innerHTML = years.map(y => `<option value="${y}" ${String(y) === String(selectedYear) ? 'selected' : ''}>${y}</option>`).join('');
+    }
+
+    // ฟังก์ชันถูกเรียกเมื่อผู้ใช้เปลี่ยนปีการศึกษาผ่าน Dropdown
+    function onYearChange() {
+        const selector = document.getElementById('yearSelector');
+        if (selector.value && selector.value !== String(currentYear)) {
+            fetchDataByYear(selector.value);
+        }
+    }
 
     window.addEventListener('resize', () => {
         if(document.getElementById('mainWebsiteContent').style.display === 'block') {
@@ -912,35 +943,30 @@ window.onload = () => {
 
     // --- ตรวจจับการเลื่อนหน้าจอเพื่อแสดง/ซ่อน Navbar อัจฉริยะ และ ปุ่ม Scroll-to-Top ---
     let lastScrollTop = 0;
-    const scrollThreshold = 50; // ระยะขั้นต่ำในการเลื่อนเพื่อเริ่มซ่อน/แสดง
+    const scrollThreshold = 50; 
 
     window.addEventListener('scroll', () => {
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         const navbar = document.querySelector('.navbar.sticky-top');
         let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        // จัดการ Scroll-to-Top Button
         if (currentScroll > 400) {
             scrollTopBtn.classList.add('show');
         } else {
             scrollTopBtn.classList.remove('show');
         }
 
-        // จัดการพฤติกรรม Navbar (Slide Up / Slide Down)
         if (navbar) {
             if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
-                // เลื่อนลง (Scroll Down) -> ซ่อน Navbar
                 navbar.classList.add('nav-hidden');
             } else if (currentScroll < lastScrollTop || currentScroll <= 10) {
-                // เลื่อนขึ้น (Scroll Up) หรืออยู่ด้านบนสุด -> แสดง Navbar
                 navbar.classList.remove('nav-hidden');
             }
         }
         
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // ป้องกันค่าติดลบในมือถือบางรุ่น
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
     }, { passive: true });
 
-    // ฟังก์ชันเลื่อนหน้าจอกลับขึ้นด้านบนอย่างนุ่มนวล
     function scrollToTop() {
         window.scrollTo({
             top: 0,
@@ -948,49 +974,92 @@ window.onload = () => {
         });
     }
 
-    // --- ฟังก์ชันแปลงสัญลักษณ์พิเศษอัจฉริยะ (Custom Tags Parser) ---
-    function parseCustomTokens(text) {
-        if (text === null || text === undefined || text === '') return '';
-        let str = String(text).replace(/\u00a0/g, ' ');
-        
-        // [Security Mitigation] ทำความสะอาดบล็อกคำสั่งสคริปต์ และ Event Handlers อันตราย ป้องกันช่องโหว่ XSS 
-        str = str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '');
-        str = str.replace(/on\w+\s*=\s*["'][^"']*["']/gi, '');
-        str = str.replace(/on\w+\s*=\s*[^ >]+/gi, '');
-        
-        // ค้นหาข้อความภายในสัญลักษณ์ << ... >>
-        const regex = /<<([^>]+)>>/g;
-        
-        str = str.replace(regex, function(match, innerContent) {
-            // แยกกลุ่มย่อยภายในด้วยเครื่องหมาย # เพื่ออนุญาตให้เกิดจุดขึ้นบรรทัดใหม่
-            const parts = innerContent.split('#');
-            // ครอบคำย่อยด้วยคลาส nobrk-token (ซึ่งมี CSS white-space: nowrap) เพื่อป้องกันการฉีกคำ
-            const processedParts = parts.map(part => `<span class="nobrk-token">${part}</span>`);
-            // เชื่อมกันใหม่ด้วยแท็ก <wbr> (Word Break Opportunity) ช่วยระบุจุดตัดบรรทัดเมื่อพื้นที่แสดงผลล้น
-            return processedParts.join('<wbr>');
-        });
-        
-        // ล้างสัญลักษณ์ '#', '<<', และ '>>' ที่อาจหลงเหลือนอกขอบเขตออกทั้งหมดตามโครงสร้างเงื่อนไขความปลอดภัย
-        str = str.replace(/#/g, '').replace(/<</g, '').replace(/>>/g, '');
-        return str;
+    // --- ฟังก์ชัน Escape อักขระพิเศษ ป้องกัน XSS อย่างสมบูรณ์ ---
+    function escapeHtmlSafe(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
     }
 
-    // --- ฟังก์ชันสร้างเอฟเฟกต์แสงวิบวับระยิบระยับเมื่อเลื่อนผ่านหรือคลิก (Sparkles Generator) ---
+    // --- ฟังก์ชันแปลงสัญลักษณ์พิเศษ (Lexer Parser) รักษาความปลอดภัย XSS และรูปแบบ ---
+    function parseCustomTokens(text) {
+        if (!text) return '';
+        let input = String(text).replace(/\u00a0/g, ' ');
+        
+        let tokens = [];
+        let i = 0;
+        let currentText = "";
+        
+        // 1. กระบวนการ Tokenize (แยกประเภทข้อความ)
+        while (i < input.length) {
+            // ก. ตรวจจับและเก็บแท็ก <br>
+            let brMatch = input.substring(i).match(/^<br\s*\/?>/i);
+            if (brMatch) {
+                if (currentText) tokens.push({ type: 'text', value: currentText });
+                tokens.push({ type: 'br' });
+                currentText = "";
+                i += brMatch[0].length;
+                continue;
+            }
+            
+            // ข. ตรวจจับสัญลักษณ์จัดกลุ่ม <<...>>
+            if (input.substring(i, i + 2) === "<<") {
+                let endIndex = input.indexOf(">>", i + 2);
+                if (endIndex !== -1) {
+                    if (currentText) tokens.push({ type: 'text', value: currentText });
+                    let content = input.substring(i + 2, endIndex);
+                    tokens.push({ type: 'custom_group', value: content });
+                    currentText = "";
+                    i = endIndex + 2;
+                    continue;
+                }
+            }
+            
+            currentText += input[i];
+            i++;
+        }
+        if (currentText) tokens.push({ type: 'text', value: currentText });
+        
+        // 2. กระบวนการ Render & Sanitize
+        let safeHtml = "";
+        for (let token of tokens) {
+            if (token.type === 'text') {
+                // ล้างเศษซาก #, <<, >> ที่ไม่ได้เข้าคู่ให้หมดไป และ Escape ข้อความธรรมดา
+                let cleanText = token.value.replace(/[#]/g, '').replace(/<</g, '').replace(/>>/g, '');
+                safeHtml += escapeHtmlSafe(cleanText);
+            } else if (token.type === 'br') {
+                safeHtml += "<br>"; // อนุญาตเฉพาะ <br> ทำงานได้อย่างปลอดภัย
+            } else if (token.type === 'custom_group') {
+                // แยกคำภายในด้วย # และสร้างคลาสป้องกันการฉีกคำ
+                let parts = token.value.split('#');
+                let processedParts = parts.map(part => {
+                    let cleanPart = part.replace(/<</g, '').replace(/>>/g, '');
+                    // ใช้ escapeHtmlSafe เพื่อป้องกันสคริปต์แฝงตัวด้านในวงเล็บ
+                    return `<span class="nobrk-token">${escapeHtmlSafe(cleanPart)}</span>`;
+                });
+                safeHtml += processedParts.join('<wbr>');
+            }
+        }
+        
+        return safeHtml;
+    }
+
     function triggerSparkleEffect(event, element) {
         const bounds = element.getBoundingClientRect();
-        // พิกัดแบบสุ่มกระจายรอบจุดที่เมาส์สัมผัส
         for (let i = 0; i < 6; i++) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle-element';
             
-            // สุ่มทิศทางและระยะทางเคลื่อนที่ของแสงระยิบระยับ
             const moveX = (Math.random() - 0.5) * 40;
             const moveY = (Math.random() - 0.5) * 40;
             
             sparkle.style.setProperty('--mx', `${moveX}px`);
             sparkle.style.setProperty('--my', `${moveY}px`);
             
-            // กำหนดตำแหน่งเกิดแสงอ้างอิงภายในตัวอักษร
             const posX = event.clientX - bounds.left + (Math.random() - 0.5) * 15;
             const posY = event.clientY - bounds.top + (Math.random() - 0.5) * 10;
             
@@ -998,8 +1067,6 @@ window.onload = () => {
             sparkle.style.top = `${posY}px`;
             
             element.appendChild(sparkle);
-            
-            // ล้างอิลิเมนต์ทิ้งเมื่ออนิเมชันแสงแสดงผลเสร็จสิ้น
             setTimeout(() => sparkle.remove(), 700);
         }
     }
@@ -1015,7 +1082,6 @@ window.onload = () => {
         }
     }
 
-    // ================= อัปเดตฟังก์ชัน renderBanners =================
     function renderBanners(b) {
         const container = document.getElementById('bannerItems');
         const indicatorsContainer = document.getElementById('bannerIndicators');
@@ -1031,19 +1097,16 @@ window.onload = () => {
             const hasLink = banner.linkUrl && banner.linkUrl.trim() !== "";
             const imgHtml = `<img src="${banner.imageUrl}" class="d-block w-100 ratio-16-5" decoding="async">`;
             
-            // สร้างป้าย Call-to-Action หากมีลิงก์
             const ctaHtml = hasLink 
                 ? `<div class="banner-cta-badge"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> เปิดลิงก์</div>` 
                 : '';
             
-            // แทรกรูป (และลิงก์/ป้าย CTA)
             itemsHtml += `
                 <div class="carousel-item ${i===0?'active':''}" data-bs-interval="5000">
                     ${hasLink ? `<a href="${banner.linkUrl}" target="_blank" class="banner-link">${imgHtml}${ctaHtml}</a>` : imgHtml}
                 </div>
             `;
             
-            // แทรกจุดบอกตำแหน่ง
             indicatorsHtml += `
                 <button type="button" data-bs-target="#mainBanner" data-bs-slide-to="${i}" class="${i===0?'active':''}" aria-label="Slide ${i+1}"></button>
             `;
@@ -1056,13 +1119,10 @@ window.onload = () => {
         
         const mainBannerEl = document.getElementById('mainBanner');
         if(mainBannerEl) {
-            // ตั้งค่าเวลา 5000ms (5 วินาที) และหยุดเมื่อชี้เมาส์ (pause: 'hover')
             new bootstrap.Carousel(mainBannerEl, { interval: 5000, ride: 'carousel', pause: 'hover' });
         }
     }
-    // =============================================================
 
-    // --- ฟังก์ชันแสดงประกาศ / ข่าวสาร (รองรับสถานะ Published, Draft และ Is_Pinned ปักหมุด) ---
     function renderAnnouncements(anns) {
         const section = document.getElementById('announcementSection');
         const grid = document.getElementById('announcementGrid');
@@ -1072,14 +1132,12 @@ window.onload = () => {
             return;
         }
         
-        // กรองเฉพาะสถานะที่เผยแพร่ (Published) และตัด Draft ออก
         let published = anns.filter(a => a.Status === 'Published');
         if (published.length === 0) {
             section.style.display = 'none';
             return;
         }
 
-        // จัดเรียงลำดับ: ข่าวที่ปักหมุด (Is_Pinned = True) จะถูกดันขึ้นไปแสดงไว้บนสุดเสมอ
         published.sort((a, b) => {
             const pinA = String(a.Is_Pinned).toUpperCase() === 'TRUE';
             const pinB = String(b.Is_Pinned).toUpperCase() === 'TRUE';
@@ -1090,19 +1148,17 @@ window.onload = () => {
         section.style.display = 'block';
         grid.innerHTML = published.map((ann, idx) => {
             const title = ann.Title ? parseCustomTokens(ann.Title) : 'ไม่มีหัวข้อ';
-            const date = ann.Date || '';
+            const date = ann.Date ? escapeHtmlSafe(ann.Date) : '';
             const details = ann.Details ? parseCustomTokens(ann.Details) : '';
             const img = ann.Image_URL || '';
             const format = ann.Format || 'Image+Text';
             const hasLink = ann.Link_URL && ann.Link_URL.trim() !== "";
             const isPinned = String(ann.Is_Pinned).toUpperCase() === 'TRUE';
             
-            // หากมีลิงก์ จะแสดงป้าย badge เล็กๆ หลังหัวข้อข่าวสาร
             const linkBadgeHtml = hasLink 
                 ? `<span class="badge" style="background:var(--pn-blue-soft); color:var(--pn-blue); border:1px solid var(--pn-line); font-size:0.7rem; margin-left:6px; vertical-align:middle;"><i class="fa-solid fa-link"></i></span>` 
                 : '';
             
-            // สัญลักษณ์ปักหมุดมุมขวาบนของข่าวสำคัญ
             const pinBadgeHtml = isPinned 
                 ? `<div class="ann-pin-badge" title="ประกาศปักหมุดสำคัญ"><i class="fa-solid fa-thumbtack"></i></div>` 
                 : '';
@@ -1137,7 +1193,6 @@ window.onload = () => {
         }).join('');
     }
 
-    // --- ฟังก์ชันเปิดหน้าต่างรายละเอียดประกาศ ---
     function openAnnouncement(idx) {
         let published = rawAnnouncements.filter(a => a.Status === 'Published');
         published.sort((a, b) => {
@@ -1151,7 +1206,7 @@ window.onload = () => {
         if(!ann) return;
 
         document.getElementById('modalAnnTitle').innerHTML = ann.Title ? parseCustomTokens(ann.Title) : '-';
-        document.getElementById('modalAnnDate').innerHTML = ann.Date ? `<i class="fa-regular fa-calendar me-1"></i> ${ann.Date}` : '';
+        document.getElementById('modalAnnDate').innerHTML = ann.Date ? `<i class="fa-regular fa-calendar me-1"></i> ${escapeHtmlSafe(ann.Date)}` : '';
         document.getElementById('modalAnnDetails').innerHTML = ann.Details ? parseCustomTokens(ann.Details) : '';
 
         const imgEl = document.getElementById('modalAnnImage');
@@ -1163,7 +1218,6 @@ window.onload = () => {
             imgEl.src = '';
         }
 
-        // ตรวจสอบว่าประกาศนี้มีลิงก์ปลายทางหรือไม่
         if (ann.Link_URL && ann.Link_URL.trim() !== '') {
             document.getElementById('modalAnnLinkBtn').href = ann.Link_URL;
             document.getElementById('modalAnnLinkWrap').style.display = 'block';
@@ -1175,22 +1229,6 @@ window.onload = () => {
         new bootstrap.Modal(document.getElementById('announcementDetailModal')).show();
     }
 
-    function initYearSelector() {
-        const selector = document.getElementById('yearSelector');
-        const allYears = [...rawMembers.map(m => m.Academic_Year), ...rawAdvisors.map(a => a.Academic_Year)];
-        const years = [...new Set(allYears)].filter(y => y).sort((a,b) => b-a);
-        
-        if(years.length === 0) {
-            selector.innerHTML = `<option value="">ไม่มีข้อมูล</option>`;
-            return;
-        }
-        
-        selector.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join('');
-        currentYear = years[0];
-        updateView();
-    }
-
-    // --- ระบบ Debounce ค้นหา (หน่วงเวลา 0.3 วินาที) ---
     function handleSearchInput() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
@@ -1221,20 +1259,14 @@ window.onload = () => {
         `;
     }
 
+    // --- ฟังก์ชันอัปเดตหน้าจอและการค้นหา ---
     function updateView() {
-        const selector = document.getElementById('yearSelector');
-        if(!selector.value) return;
-        currentYear = selector.value;
-        
         const searchKeyword = document.getElementById('systemSearchInput').value.trim().toLowerCase();
         const activeTab = document.querySelector('#pills-tab .active').id;
         
-        let filteredMembersByYear = rawMembers.filter(m => String(m.Academic_Year) === String(currentYear));
-        let filteredAdvisorsByYear = rawAdvisors.filter(a => String(a.Academic_Year) === String(currentYear));
-        const filteredActivities = rawActivities.filter(a => String(a.Academic_Year) === String(currentYear));
-
+        // ข้อมูลถูกกรองจาก Backend ให้ตรงกับปีที่เลือกมาแล้ว 
         if(searchKeyword !== "") {
-            currentFilteredMembers = filteredMembersByYear.filter(m => {
+            currentFilteredMembers = rawMembers.filter(m => {
                 const name = (m.Name || "").toLowerCase();
                 const nickname = (m.Nickname || "").toLowerCase();
                 const posElection = (m.Pos_Election || "").toLowerCase();
@@ -1250,7 +1282,7 @@ window.onload = () => {
                        party.includes(searchKeyword);
             });
 
-            currentFilteredAdvisors = filteredAdvisorsByYear.filter(a => {
+            currentFilteredAdvisors = rawAdvisors.filter(a => {
                 const name = (a.Name || "").toLowerCase();
                 const nickname = (a.Nickname || "").toLowerCase();
                 const dept = (a.Department || "").toLowerCase();
@@ -1260,13 +1292,12 @@ window.onload = () => {
                        dept.includes(searchKeyword);
             });
         } else {
-            currentFilteredMembers = filteredMembersByYear;
-            currentFilteredAdvisors = filteredAdvisorsByYear;
+            currentFilteredMembers = rawMembers;
+            currentFilteredAdvisors = rawAdvisors;
         }
 
-        // --- ระบบเลือกเรนเดอร์ตามแท็บที่แอคทีฟ ---
         if(activeTab === 'pills-activity-tab') {
-            renderActivities(filteredActivities);
+            renderActivities(rawActivities);
         } else if(activeTab === 'pills-election-tab') {
             renderElection(currentFilteredMembers);
         } else if(activeTab === 'pills-operation-tab') {
@@ -1278,12 +1309,10 @@ window.onload = () => {
         adjustLongNames();
     }
 
-    // --- ฟังก์ชันเรนเดอร์ภาพกิจกรรม (กรองเฉพาะ Status = Published และเรียงจากวันที่ล่าสุดไปเก่าสุดอัตโนมัติ) ---
     function renderActivities(activities) {
         const targetContainer = document.getElementById('activityRenderContainer');
         const section = document.getElementById('activitySection');
         
-        // กรองเฉพาะกิจกรรมที่มีสถานะเผยแพร่ (Published) เท่านั้น (ซ่อน Draft)
         const publishedActivities = activities ? activities.filter(a => a.Status === 'Published' || !a.Status) : [];
         
         if (publishedActivities.length === 0) {
@@ -1299,11 +1328,10 @@ window.onload = () => {
         
         section.style.display = 'block';
         
-        // เรียงลำดับกิจกรรมจากวันที่จัดกิจกรรมล่าสุดไปเก่าสุดอัตโนมัติ (Activity_Date)
         const sortedActivities = [...publishedActivities].sort((a, b) => {
             const dateA = a.Activity_Date ? parseDateStringForIndex(a.Activity_Date) : new Date(0);
             const dateB = b.Activity_Date ? parseDateStringForIndex(b.Activity_Date) : new Date(0);
-            return dateB - dateA; // ล่าสุดไปเก่าสุด
+            return dateB - dateA;
         });
 
         targetContainer.innerHTML = sortedActivities.map((act, idx) => {
@@ -1340,13 +1368,12 @@ window.onload = () => {
         });
     }
 
-    // ฟังก์ชันแปลงสตริงวันที่ (วว/ดด/ปปปป) ให้เป็น Date Object สำหรับใช้เรียงลำดับกิจกรรม
     function parseDateStringForIndex(dateStr) {
         if (!dateStr) return new Date(0);
         const parts = String(dateStr).split('/');
         if (parts.length === 3) {
             let year = parseInt(parts[2], 10);
-            if (year > 2500) year -= 543; // แปลง พ.ศ. เป็น ค.ศ.
+            if (year > 2500) year -= 543;
             return new Date(year, parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
         }
         return new Date(0);
@@ -1363,7 +1390,7 @@ window.onload = () => {
         const position = isOperation ? (member.Pos_Operation || "") : (member.Pos_Election || "");
         const isLeader = position.includes("ประธาน") && !position.includes("รอง");
         const isSubLeader = position.includes("รองประธาน");
-        // ล้างอักขระพิเศษและแปลงสัญลักษณ์ในตำแหน่ง/ชื่อพรรค
+        
         const parsedName = member.Name ? parseCustomTokens(member.Name) : '';
         const parsedPosition = parseCustomTokens(position);
         const parsedParty = member.Party ? parseCustomTokens(member.Party) : '-';
@@ -1389,7 +1416,7 @@ window.onload = () => {
                         ${badgeHTML}
                     </div>
                     <div class="card-body">
-                        <div class="card-title target-name-adjust" data-fullname="${member.Name || ''}">${parsedName}</div>
+                        <div class="card-title target-name-adjust" data-fullname="${escapeHtmlSafe(member.Name || '')}">${parsedName}</div>
                         <div class="pos-badge">${parsedPosition}</div>
                         <div class="mt-2"><span class="badge rounded-pill bg-light text-dark border">พรรค ${parsedParty}</span></div>
                     </div>
@@ -1413,7 +1440,7 @@ window.onload = () => {
                         <div class="leader-badge badge-advisor"><i class="fa-solid fa-star me-1"></i>ที่ปรึกษา</div>
                     </div>
                     <div class="card-body">
-                        <div class="card-title target-name-adjust" data-fullname="${advisor.Name || ''}">${parsedName}</div>
+                        <div class="card-title target-name-adjust" data-fullname="${escapeHtmlSafe(advisor.Name || '')}">${parsedName}</div>
                         <div class="pos-badge text-muted">${parsedDept}</div>
                         <div class="mt-2"><span class="badge rounded-pill bg-light text-dark border">${nicknameText}</span></div>
                     </div>
@@ -1430,7 +1457,7 @@ window.onload = () => {
             el.style.whiteSpace = 'nowrap';
             
             if (el.scrollWidth > el.clientWidth) {
-                // หากชื่อนั้นเป็นกลุ่มคำสัญลักษณ์พิเศษอยู่แล้ว ให้ตัดบรรทัดผ่าน Tag อัจฉริยะตามธรรมชาติของความกว้าง CSS
+                // หากชื่อนั้นเป็นกลุ่มคำสัญลักษณ์พิเศษอยู่แล้ว ให้ตัดบรรทัดผ่าน Tag อัจฉริยะ
                 if (fullName.includes('<<') || fullName.includes('#')) {
                     el.style.whiteSpace = 'normal';
                     el.innerHTML = parseCustomTokens(fullName);
@@ -1526,7 +1553,7 @@ window.onload = () => {
         
         let updatedAtHTML = '';
         if (m.Data_Updated_At && m.Data_Updated_At.toString().trim() !== '' && m.Data_Updated_At.toString().trim() !== '-') {
-            updatedAtHTML = `<p class="mb-1 text-muted" style="font-size: 0.85rem;"><i class="fa-solid fa-clock-rotate-left me-1"></i>อัปเดตข้อมูลเมื่อ: ${m.Data_Updated_At}</p>`;
+            updatedAtHTML = `<p class="mb-1 text-muted" style="font-size: 0.85rem;"><i class="fa-solid fa-clock-rotate-left me-1"></i>อัปเดตข้อมูลเมื่อ: ${escapeHtmlSafe(m.Data_Updated_At)}</p>`;
         }
 
         content.innerHTML = `
@@ -1535,7 +1562,7 @@ window.onload = () => {
                     <img src="${m.Photo_URL || 'https://via.placeholder.com/300x400'}" class="profile-img-modal shadow" decoding="async">
                 </div>
                 <div class="col-md-7">
-                    <h2 class="fw-bold text-primary mb-1 modal-target-name-adjust" data-fullname="${m.Name || ''}" style="line-height: 1.4; width: 100%; overflow: hidden;">${parsedName}</h2>
+                    <h2 class="fw-bold text-primary mb-1 modal-target-name-adjust" data-fullname="${escapeHtmlSafe(m.Name || '')}" style="line-height: 1.4; width: 100%; overflow: hidden;">${parsedName}</h2>
                     <p class="text-muted mb-3 fs-5">ชื่อเล่น: <strong>${m.Nickname ? parseCustomTokens(m.Nickname) : '-'}</strong></p>
                     <hr>
                     <div class="mb-4">
@@ -1576,12 +1603,12 @@ window.onload = () => {
                     <img src="${a.Photo_URL || 'https://via.placeholder.com/300x400'}" class="profile-img-modal shadow" decoding="async">
                 </div>
                 <div class="col-md-7">
-                    <h2 class="fw-bold text-primary mb-1 modal-target-name-adjust" data-fullname="${a.Name || ''}" style="line-height: 1.4; width: 100%; overflow: hidden;">${parsedName}</h2>
+                    <h2 class="fw-bold text-primary mb-1 modal-target-name-adjust" data-fullname="${escapeHtmlSafe(a.Name || '')}" style="line-height: 1.4; width: 100%; overflow: hidden;">${parsedName}</h2>
                     ${nicknameText ? `<p class="text-muted mb-3 fs-5"><strong>${nicknameText}</strong></p>` : ''}
                     <hr>
                     <div class="mb-4">
                         <p class="mb-2 fs-6"><strong>กลุ่มสาระการเรียนรู้:</strong> กลุ่มสาระฯ ${a.Department ? parseCustomTokens(a.Department) : 'ไม่ระบุ'}</p>
-                        <p class="mb-2 fs-6"><strong>ประจำปีการศึกษา:</strong> พ.ศ. ${a.Academic_Year || '-'}</p>
+                        <p class="mb-2 fs-6"><strong>ประจำปีการศึกษา:</strong> พ.ศ. ${escapeHtmlSafe(a.Academic_Year || '-')}</p>
                     </div>
                     <div class="contact-box" style="border-left: 5px solid var(--pn-blue);">
                         <h6 class="fw-bold text-dark"><i class="fa-solid fa-address-book me-2"></i>ช่องทางการติดต่อ</h6>
@@ -1626,4 +1653,3 @@ window.onload = () => {
 </script>
 </body>
 </html>
-
