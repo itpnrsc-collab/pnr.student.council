@@ -873,7 +873,12 @@ window.onload = () => {
             if (data.fbLink) document.getElementById('scFacebookLink').href = data.fbLink;
             if (data.igLink) document.getElementById('scInstagramLink').href = data.igLink;
 
-            if(data.isClosed) {
+            // ตรวจสอบ URL Parameter ?view=admin
+            const urlParams = new URLSearchParams(window.location.search);
+            const isAdminView = urlParams.get('view') === 'admin';
+
+            // หาก isClosed เป็น true และไม่มี ?view=admin ให้แสดงหน้าแจ้งปิดปรับปรุง
+            if(data.isClosed && !isAdminView) {
                 document.getElementById('loadingSkeletonContainer').style.display = 'none';
                 document.getElementById('maintenanceScreen').style.display = 'flex';
                 setupLogos(data.schoolLogo, data.councilLogo);
@@ -1621,3 +1626,4 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
