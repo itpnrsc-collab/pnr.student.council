@@ -1063,8 +1063,8 @@ function changeYearFilter() {
         const activeTab = document.querySelector('#pills-tab .active').id;
         
         // ข้อมูลได้รับการกรองตามปีการศึกษาจากฝั่งเซิร์ฟเวอร์เรียบร้อยแล้ว
-        let currentFilteredMembers = rawMembers;
-        let currentFilteredAdvisors = rawAdvisors;
+        currentFilteredMembers = rawMembers;
+        currentFilteredAdvisors = rawAdvisors;
         const filteredActivities = rawActivities;
 
         if(searchKeyword !== "") {
